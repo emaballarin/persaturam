@@ -1,8 +1,8 @@
 #!/bin/bash
-########################################
-## AIStack, v. 0.7-FPOS (15/09/2018)  ##
-## Feature-packed | one-shot version  ##
-########################################
+#########################################
+## AIStack, v. 0.7.1-FPOS (15/09/2018) ##
+## Feature-packed | one-shot version   ##
+#########################################
 #
 # A deterministic, Anaconda-powered, PyTorch-based, AI research deployment
 # installer, with a focus on deep learning, deep probabilistic programming and
@@ -78,7 +78,6 @@ export SELF_MPIROOT="/opt/openmpi/"                                             
 
 # Execution flags
 export SELF_FIRSTRUN="1"                                                # Set to "1" if you want to install a new environment, to "0" in all other cases
-export SELF_XGBOOST="1"                                                 # Set to "1" if you want XGBoost Python bindings to be installed (currently experiencing some problems, though!)
 
 
 # Prepare local temporary directory
@@ -219,7 +218,7 @@ cd ./pipdeps
 # Meta
 git clone --recursive https://github.com/srossross/Meta.git
 cd Meta
-pip install --upgrade --no-deps ./
+pip install --upgrade --no-deps .
 cd ../
 
 # Pyglet
@@ -240,7 +239,7 @@ export CC="$SELF_OLDCC"
 # Visdom
 git clone --recursive https://github.com/facebookresearch/visdom.git
 cd visdom
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # MuJoCo-Py (OpenAI)
@@ -317,31 +316,31 @@ cd ./extras
 # TorchVision
 git clone --recursive https://github.com/pytorch/vision.git
 cd ./vision
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # TorchAudio
 git clone --recursive https://github.com/pytorch/audio.git
 cd ./audio
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # TorchText
 git clone --recursive https://github.com/pytorch/text.git
 cd text
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # TNT
 git clone --recursive https://github.com/pytorch/tnt.git
 cd tnt
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # Ignite
 git clone --recursive https://github.com/pytorch/ignite.git
 cd ignite
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # Torchfile
@@ -371,25 +370,25 @@ pip install --upgrade --no-deps graphviz
 # SKORCH
 git clone https://github.com/dnouri/skorch.git
 cd skorch
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # SCOOP
 git clone --recursive https://github.com/soravux/scoop.git
 cd scoop
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # DEAP
 git clone --recursive https://github.com/DEAP/deap.git
 cd deap
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # ELI5
 git clone --recursive https://github.com/TeamHG-Memex/eli5.git
 cd eli5
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # ONNX
@@ -437,20 +436,20 @@ pip install --upgrade --no-deps sklearn-pandas
 # CARL, custom-merged version
 git clone --recursive https://github.com/emaballarin/carl.git
 cd carl
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # TensorLy
 git clone --recursive https://github.com/tensorly/tensorly
 cd tensorly
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # Facebook SparseConvNet
 git clone --recursive https://github.com/facebookresearch/SparseConvNet.git
 cd SparseConvNet
 rm -rf build/ dist/ sparseconvnet.egg-info sparseconvnet_SCN*.so    # Port of script ./build.sh
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # pyRTC (NVRTC)
@@ -459,26 +458,26 @@ pip install --upgrade --no-deps pynvrtc
 # LieLearn
 git clone --recursive https://github.com/AMLab-Amsterdam/lie_learn.git
 cd lie_learn
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # s2cnn (Spherical ConvNets)
 git clone --recursive https://github.com/jonas-koehler/s2cnn.git
 cd s2cnn
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # Paysage
 git clone --recursive https://github.com/drckf/paysage.git
 cd paysage
 rm ./requirements.txt   # Precautionary measure
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # PyVarInf
 git clone --recursive https://github.com/ctallec/pyvarinf.git
 cd pyvarinf
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # pytorch_fft (NOT COMPATIBLE ANYMORE!)
@@ -524,25 +523,25 @@ pip install --upgrade --no-deps plyfile
 # PyTorch Scatter
 git clone --recursive https://github.com/rusty1s/pytorch_scatter.git
 cd pytorch_scatter
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # PyTorch Cluster
 git clone --recursive https://github.com/rusty1s/pytorch_cluster.git
 cd pytorch_cluster
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # PyTorch Spline Cov
 git clone --recursive https://github.com/rusty1s/pytorch_spline_conv.git
 cd pytorch_spline_conv
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # Pytorch Geometric
 git clone --recursive https://github.com/rusty1s/pytorch_geometric.git
 cd pytorch_geometric
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # PyTorch BinCount (NOT COMPATIBLE ANYMORE!)
@@ -554,31 +553,31 @@ cd ../
 # PyTorch Sparse
 git clone --recursive https://github.com/rusty1s/pytorch_sparse.git
 cd pytorch_sparse
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # TorchBearer
 git clone --recursive https://github.com/ecs-vlc/torchbearer.git
 cd torchbearer
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # PyCMA
 git clone --recursive https://github.com/CMA-ES/pycma.git
 cd pycma
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # Lagom (requires PyTorch "master"), tweaked to avoid dependency re-download
 git clone --recursive https://github.com/zuoxingdong/lagom.git
 cd lagom
-pip install --upgrade --no-deps ./
+pip install --upgrade --no-deps .
 cd ../
 
 # HyperLearn for PyTorch
 git clone --recursive https://github.com/danielhanchen/hyperlearn.git
 cd hyperlearn
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # PyProb (K. Cranmer et al., 2018), dependency-stripped version
@@ -631,19 +630,19 @@ cd $SELF_BASEDIR/chainerextras
 # ChainerEX
 git clone --recursive https://github.com/corochann/chainerex.git
 cd chainerex
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # chainer_sklearn
 git clone --recursive https://github.com/corochann/chainer_sklearn.git
 cd chainer_sklearn
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # Chainer Chemistry
 git clone https://github.com/pfnet-research/chainer-chemistry.git
 cd chainer-chemistry
-pip install --upgrade --no-deps ./
+pip install --upgrade --no-deps .
 cd ../
 
 ########## END ##########
@@ -678,12 +677,12 @@ cp -R ./torchcv "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/lib/python$SELF_PYVRS
 # ULiège - Montefiore AI Tools
 git clone --recursive https://github.com/montefiore-ai/pt_inspector.git
 cd pt_inspector
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 git clone --recursive https://github.com/montefiore-ai/image_datasets.git
 cd image_datasets
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # Super-awesome Jupyter Notebook / Script interplay tool
@@ -692,36 +691,36 @@ pip install --upgrade --no-deps jupytext
 # Keras-like interface to PyTorch
 git clone --recursive https://github.com/abhaikollara/flare.git
 cd flare
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # Hypothesis (upstream + Simone Robutti's CSV extension)
 pip install --upgrade --no-deps hypothesis
 git clone --recursive https://github.com/chobeat/hypothesis-csv.git
 cd hypothesis-csv
-python setup.py install
+pip install --upgrade --no-deps .
 cd ../
 
 # PyBasicBayes
 git clone --recursive https://github.com/mattjj/pybasicbayes.git
 cd pybasicbayes
-pip install --upgrade --no-deps ./
+pip install --upgrade --no-deps .
 cd ../
 
 # Some Reinforcement Learning "stuff" from Edouard Leurent (INRIA Lille)
 git clone --recursive https://github.com/eleurent/highway-env.git
 cd highway-env
-pip install --upgrade --no-deps ./
+pip install --upgrade --no-deps .
 cd ../
 
 git clone --recursive https://github.com/eleurent/rl-agents.git
 cd rl-agents
-pip install --upgrade --no-deps ./
+pip install --upgrade --no-deps .
 cd ../
 
 git clone --recursive https://github.com/eleurent/obstacle-env.git
 cd obstacle-env
-pip install --upgrade --no-deps ./
+pip install --upgrade --no-deps .
 cd ../
 
 
@@ -733,87 +732,18 @@ cd ../
 pip install --upgrade --no-deps update_checker
 pip install --upgrade --no-deps stopit
 
-# Install XGboost: START #
-# Fixes
-source deactivate
-rm -f "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/cmake"
-rm -f "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/ccmake"
-ln -s "$(which cmake)" "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/cmake"
-ln -s "$(which ccmake)" "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/ccmake"
-source $SELF_CEACT_COMMAND $SELF_CONDA_ENV_NAME
-# Actual installation
-if [ "$SELF_XGBOOST" = "1" ]; then
-    read -p "Now, XGBoost will be configured, built and installed as a Python module. Press [ENTER] to continue..."
-    cd $SELF_BASEDIR
-    cd ./extras
-    git clone --recursive -b release_0.80 https://github.com/dmlc/xgboost
-    cd xgboost
-    mkdir builddir
-    cd builddir
-    echo ' '
-    echo "Ready to configure XGBoost (remember to suppress warnings: C/CXX FLAGS: -w)?"
-    read -p "Press [ENTER] to proceed..."
-    echo ' '
-    ccmake ../
-    echo ' '
-    echo "Ready to build XGBoost?"
-    read -p "Press [ENTER] to proceed..."
-    echo ' '
-    make -j12
-    echo ' '
-    echo "Ready to install XGBoost?"
-    read -p "Press [ENTER] when you are ready to build Python package..."
-    echo ' '
-    cd ../
-    cd python-package
-    python setup.py install
-    cd ../
-    cd ../
-    echo ' '
-fi
-# Install XGboost: STOP #
+# XGBOOST (prebuilt, with multi-gpu support!)
+mkdir ./xgboost/
+cd ./xgboost/
+wget --tries=0 --retry-connrefused --continue --progress=bar --show-progress --timeout=30 --dns-timeout=30 --random-wait https://s3-us-west-2.amazonaws.com/xgboost-wheels/xgboost-multigpu-0.80-py2.py3-none-manylinux1_x86_64.whl
+pip install --upgrade --no-deps ./xgboost-multigpu-0.80-py2.py3-none-manylinux1_x86_64.whl
+cd ../
 
 # TPOT
 pip install --upgrade --no-deps tpot
 
 ########## END ##########
 #########################
-
-# Fix the nasty cmake/ccmake bug
-source deactivate
-rm -f "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/cmake"
-rm -f "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/ccmake"
-ln -s "$(which cmake)" "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/cmake"
-ln -s "$(which ccmake)" "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/ccmake"
-source $SELF_CEACT_COMMAND $SELF_CONDA_ENV_NAME
-
-
-# Uninstall useless PIP packages...
-pip uninstall -y enum34
-pip uninstall -y matplotlib
-pip uninstall -y scipy
-pip uninstall -y websocket-client
-pip uninstall -y docker-pycreds
-pip uninstall -y networkx
-
-pip uninstall -y enum34
-pip uninstall -y matplotlib
-pip uninstall -y scipy
-pip uninstall -y websocket-client
-pip uninstall -y docker-pycreds
-pip uninstall -y networkx
-
-pip uninstall -y enum34
-pip uninstall -y matplotlib
-pip uninstall -y scipy
-pip uninstall -y websocket-client
-pip uninstall -y docker-pycreds
-pip uninstall -y networkx
-
-# ... and reinstall them with Conda.
-conda install -y --force matplotlib scipy networkx websocket-client docker-pycreds -c intel -c conda-forge
-conda remove -y cmake cudatoolkit curl --force
-
 
 # Fix the nasty cmake/ccmake bug
 source deactivate
