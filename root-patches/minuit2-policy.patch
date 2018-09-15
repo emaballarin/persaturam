@@ -1,0 +1,20 @@
+From 891ce8d2289403af7e3f62d1eaf798851c038ace Mon Sep 17 00:00:00 2001
+From: Emanuele Ballarin <emanuele@ballarin.cc>
+Date: Tue, 28 Aug 2018 04:56:48 +0200
+Subject: [PATCH] Enables building Minuit2 with MPI/OpenMP support
+
+---
+ math/minuit2/CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/math/minuit2/CMakeLists.txt b/math/minuit2/CMakeLists.txt
+index 31e568592ce..b7b3999eb85 100644
+--- a/math/minuit2/CMakeLists.txt
++++ b/math/minuit2/CMakeLists.txt
+@@ -1,4 +1,6 @@
+ cmake_minimum_required(VERSION 3.1)
++cmake_policy(SET CMP0023 OLD)
++
+ 
+ option(minuit2_mpi "Enable support for MPI in Minuit2")
+ option(minuit2_omp "Enable support for OpenMP in Minuit2")
