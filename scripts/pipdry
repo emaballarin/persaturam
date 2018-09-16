@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+## Emulate the pip --dry-run functionality with the help of virtualenv
+## (Statistically) concurrency safe ;-)
+#
+SELF_RANDINT="$RANDOM"
+TMPENV="pipdry_$SELF_RANDINT"
+virtualenv "/tmp/$TMPENV"; "/tmp/$TMPENV/bin/pip" "$@"; rm -R -f "/tmp/$TMPENV"
