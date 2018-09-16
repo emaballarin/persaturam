@@ -728,6 +728,11 @@ mkdir ./xgboostdir/
 cd ./xgboostdir/
 wget --tries=0 --retry-connrefused --continue --progress=bar --show-progress --timeout=30 --dns-timeout=30 --random-wait https://s3-us-west-2.amazonaws.com/xgboost-wheels/xgboost-multigpu-0.80-py2.py3-none-manylinux1_x86_64.whl
 pip install --upgrade --no-deps ./xgboost-multigpu-0.80-py2.py3-none-manylinux1_x86_64.whl
+echo ' '
+echo "If an error is displayed above, you can try to install the wheel manually. Good luck!"
+read -p "When you're done - or if it doesn't matter to you, just press [ENTER]."
+echo "The wheel is in the folder: $(pwd)"
+echo ' '
 cd ../
 
 # TPOT
@@ -745,6 +750,11 @@ git clone --recursive https://github.com/tensorly/tensorly
 cd tensorly
 pip install --upgrade --no-deps .
 cd ../
+
+# Tool to save PyTorch computational graph
+git clone --recursive git clone https://fleuret.org/git/agtree2dot
+export SELF_PYVRS="$(python -c 'import sys; print(sys.version[0])').$(python -c 'import sys; print(sys.version[2])')"
+cp -R ./agtree2dot "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/lib/python$SELF_PYVRS/site-packages/"
 
 
 # Fix the nasty cmake/ccmake bug
