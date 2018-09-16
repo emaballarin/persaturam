@@ -1,6 +1,6 @@
 #!/bin/bash
 #########################################
-## AIStack, v. 0.7.1-FPOS (15/09/2018) ##
+## AIStack, v. 0.7.2-FPOS (15/09/2018) ##
 ## Feature-packed | one-shot version   ##
 #########################################
 #
@@ -664,6 +664,7 @@ pip install --upgrade --no-deps papermill
 git clone --recursive https://github.com/kuangliu/torchcv.git
 export SELF_PYVRS="$(python -c 'import sys; print(sys.version[0])').$(python -c 'import sys; print(sys.version[2])')"
 cp -R ./torchcv "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/lib/python$SELF_PYVRS/site-packages/"
+echo 'TorchCV successfully installed!'
 
 # ULiège - Montefiore AI Tools
 git clone --recursive https://github.com/montefiore-ai/pt_inspector.git
@@ -723,17 +724,8 @@ cd ../
 pip install --upgrade --no-deps update_checker
 pip install --upgrade --no-deps stopit
 
-# XGBOOST (prebuilt, with multi-gpu support!)
-mkdir ./xgboostdir/
-cd ./xgboostdir/
-wget --tries=0 --retry-connrefused --continue --progress=bar --show-progress --timeout=30 --dns-timeout=30 --random-wait https://s3-us-west-2.amazonaws.com/xgboost-wheels/xgboost-multigpu-0.80-py2.py3-none-manylinux1_x86_64.whl
-pip install --upgrade --no-deps ./xgboost-multigpu-0.80-py2.py3-none-manylinux1_x86_64.whl
-echo ' '
-echo "If an error is displayed above, you can try to install the wheel manually. Good luck!"
-read -p "When you're done - or if it doesn't matter to you, just press [ENTER]."
-echo "The wheel is in the folder: $(pwd)"
-echo ' '
-cd ../
+# XGBOOST (prebuilt, WITHOUT multi-gpu support!)
+pip install --upgrade --no-deps --force-reinstall xgboost
 
 # TPOT
 pip install --upgrade --no-deps tpot
@@ -752,10 +744,10 @@ pip install --upgrade --no-deps .
 cd ../
 
 # Tool to save PyTorch computational graph
-git clone --recursive git clone https://fleuret.org/git/agtree2dot
-export SELF_PYVRS="$(python -c 'import sys; print(sys.version[0])').$(python -c 'import sys; print(sys.version[2])')"
-cp -R ./agtree2dot "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/lib/python$SELF_PYVRS/site-packages/"
-
+git clone --recursive https://fleuret.org/git/agtree2dot
+export SELF_PYVRS_TWO="$(python -c 'import sys; print(sys.version[0])').$(python -c 'import sys; print(sys.version[2])')"
+cp -R ./agtree2dot "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/lib/python$SELF_PYVRS_TWO/site-packages/"
+echo 'AGTree2dot successfully installed!'
 
 # Fix the nasty cmake/ccmake bug
 source deactivate
