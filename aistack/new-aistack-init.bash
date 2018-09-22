@@ -760,6 +760,18 @@ pip install --upgrade --no-deps paperspace
 # PyMetis
 pip install --upgrade --no-deps PyMetis
 
+# PyGCN
+git clone --recursive https://github.com/tkipf/pygcn.git
+cd pygcn
+pip install --upgrade --no-deps .
+cd ../
+
+# Neat Python (forked and improved!)
+git clone --recursive https://github.com/drallensmith/neat-python.git
+cd neat-python
+pip install --upgrade --no-deps .
+cd ../
+
 
 ## Posterior Knowledge & Fritz Obermeyer's toolset ##
 
