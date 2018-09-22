@@ -1,13 +1,12 @@
 #!/bin/bash
-#########################################
-## AIStack, v. 0.8.0-FPOS (22/09/2018) ##
-## Feature-packed | one-shot version   ##
-#########################################
+########################################
+##   AIStack, v. 0.9.0 (23/09/2018)   ##
+########################################
 #
 # A deterministic, Anaconda-powered, PyTorch-based, AI research deployment
 # installer, with a focus on deep learning, deep probabilistic programming and
 # inference (Bayesian included), reinforcement learning and AI-powered
-# science/experimentation. Now with some power-ups and a leaner install procedure.
+# science/experimentation.
 #
 # (c) 2018 Emanuele Ballarin <emanuele@ballarin.cc>
 # Released under the GNU-LGPL v3.
@@ -15,7 +14,7 @@
 #
 # §§ REQUIREMENTS §§
 #
-# - Relatively recent Linux operating connected to the Internet (tested on Arch);
+# - Relatively recent Linux operating connected to the Internet;
 # - Bash v.4;
 # - Anaconda Python distribution (i.e. Anaconda, MiniConda, IntelConda, ...);
 # - An Intel processor (recommended: series 6 or better) with AVX2 support;
@@ -40,14 +39,17 @@
 # Expect some adventures if you substantially diverge from the already traced
 # path. Don't be scared, though! :-)
 #
-# §§ FPOS: WHAT DOES IT MEAN? §§
-# Trying to be as concise as possible, it means three things: (a) that this
-# version has a lot of dependencies, which provide extensive functionality,
-# (b) that Anaconda's dependency resolution is sometimes sub-optimal or very
-# opaque in operation, (c) that in this specific case it goes in an endless
-# loop if trying to call for a global update after the installation of all the
-# packages. This is the reason it is not possible to do it anymore.
-# This, however, should cause no problem whatsoever... at least as far as I know.
+# §§ ADDITIONAL NOTES §§
+#
+# "MAY NOT INSTALL" -> The piece of software may fail installation and notify it.
+#                      This impacts only that single software installation and
+#                      can be ignored.
+#
+# "MAY NOT WORK"    -> The piece of software installs succseefully, but may
+#                      crash or fail when imported and/or directly used. This
+#                      is a consequence of unsupported PyTorch version or lack
+#                      of maintainance. This impacts only that single software
+#                      installation and can be ignored.
 ###
 
 
@@ -132,7 +134,7 @@ if [ "$SELF_FIRSTRUN" = "1" ]; then
     # Install dependencies from Anaconda, as much as possible
     source $SELF_CEACT_COMMAND $SELF_CONDA_ENV_NAME
     echo ' '
-    conda install -y intelpython numpy scipy matplotlib sympy scikit-learn pyyaml typing six pandas networkx requests jpeg zlib tornado cython daal h5py hdf5 pillow pycparser isort ply jinja2 arrow singledispatch mypy mypy_extensions dask mkl-devel mkl-dnn mkl-include mkl mkl_fft mkl_random icc_rt tbb greenlet protobuf libprotobuf psutil intervals nose numba cryptography glib gmp icu idna flask libffi libgcc libgcc-ng libgfortran-ng libstdcxx-ng asn1crypto openssl pyopenssl openmp theano seaborn cffi future affine zeromq setuptools pip pydaal yaml pydot backports statsmodels llvmlite graphviz openpyxl certifi click cloudpickle execnet more-itertools mpmath numexpr rope simplegeneric sqlite tcl tk pcre pexpect ptyprocess py pytables python-dateutil keras-gpu==2.2.2 tensorflow-gpu==1.10 fastrlock filelock theano==1.1 pyzmq tqdm autograd scikit-image scikit-optimize jupyter jupyter_client jupyter_console jupyter_core jupyterlab jupyterlab_launcher notebook ipykernel ipyparallel ipython ipython_genutils ipywidgets ninja widgetsnbextension pytest pytest-runner websocket-client nbconvert nbformat nbsphinx nbstripout nbval sphinx sphinxcontrib sphinxcontrib-websupport sphinx_rtd_theme imageio imagehash ipdb numpydoc pytest-cov flake8 pytest-xdist pybind11 yapf pypandoc pep8-naming wheel virtualenv mock pytest-mock tox spacy tabulate attrs jedi typing-extensions pytest-runner recommonmark sphinx-autobuild sortedcontainers sortedcollections pycodestyle progressbar2 coveralls bumpversion scrapy coverage xarray docker-pycreds appdirs packaging pyparsing urllib3 pytest-timeout quantities ordered-set pyflakes libunwind autopep8 spyder-kernels cartopy astropy termcolor terminado pydotplus opencv markdown markupsafe livereload pyopengl httplib2 pathtools pylint pyqt jsonschema parso path.py patsy pickleshare qt terminado python-dateutil wrapt cytoolz dill eigen sparsehash jupyter_contrib_nbextensions bcolz feather-format plotnine msgpack-python keras-preprocessing keras-applications ansiwrap boto3 vcrpy requests metakernel cached-property apscheduler sqlalchemy alembic gevent peewee testfixtures pbr traitlets pytz django django-extensions faker pyscaffold dask-ml scikit-mdr skrebate ncurses chardet cuda92 magma-cuda92 glfw3 docopt botocore pep8 jsonpickle pymc3 pycuda pytools nose2 mako pluggy atomicwrites pdbpp wmctrl luigi metis parmetis gperftools -c intel -c conda-forge -c pytorch -c menpo -c lukepfister
+    conda install -y intelpython numpy scipy matplotlib sympy scikit-learn pyyaml typing six pandas networkx requests jpeg zlib tornado cython daal h5py hdf5 pillow pycparser isort ply jinja2 arrow singledispatch mypy mypy_extensions dask mkl-devel mkl-dnn mkl-include mkl mkl_fft mkl_random icc_rt tbb greenlet protobuf libprotobuf psutil intervals nose numba cryptography glib gmp icu idna flask libffi libgcc libgcc-ng libgfortran-ng libstdcxx-ng asn1crypto openssl pyopenssl openmp theano seaborn cffi future affine zeromq setuptools pip pydaal yaml pydot backports statsmodels llvmlite graphviz openpyxl certifi click cloudpickle execnet more-itertools mpmath numexpr rope simplegeneric sqlite tcl tk pcre pexpect ptyprocess py pytables python-dateutil keras-gpu==2.2.2 tensorflow-gpu==1.10 fastrlock filelock theano==1.1 pyzmq tqdm autograd scikit-image scikit-optimize jupyter jupyter_client jupyter_console jupyter_core jupyterlab jupyterlab_launcher notebook ipykernel ipyparallel ipython ipython_genutils ipywidgets ninja widgetsnbextension pytest pytest-runner websocket-client nbconvert nbformat nbsphinx nbstripout nbval sphinx sphinxcontrib sphinxcontrib-websupport sphinx_rtd_theme imageio imagehash ipdb numpydoc pytest-cov flake8 pytest-xdist pybind11 yapf pypandoc pep8-naming wheel virtualenv mock pytest-mock tox spacy tabulate attrs jedi typing-extensions pytest-runner recommonmark sphinx-autobuild sortedcontainers sortedcollections pycodestyle progressbar2 coveralls bumpversion scrapy coverage xarray docker-pycreds appdirs packaging pyparsing urllib3 pytest-timeout quantities ordered-set pyflakes libunwind autopep8 spyder-kernels cartopy astropy termcolor terminado pydotplus opencv markdown markupsafe livereload pyopengl httplib2 pathtools pylint pyqt jsonschema parso path.py patsy pickleshare qt terminado python-dateutil wrapt cytoolz dill eigen sparsehash jupyter_contrib_nbextensions bcolz feather-format plotnine msgpack-python keras-preprocessing keras-applications ansiwrap boto3 vcrpy requests metakernel cached-property apscheduler sqlalchemy alembic gevent peewee testfixtures pbr traitlets pytz django django-extensions faker pyscaffold dask-ml scikit-mdr skrebate ncurses chardet cuda92 magma-cuda92 glfw3 docopt botocore pep8 jsonpickle pymc3 pycuda pytools nose2 mako pluggy atomicwrites pdbpp wmctrl luigi metis parmetis gperftools joblib gast astor -c intel -c conda-forge -c pytorch -c menpo -c lukepfister
     conda remove -y cmake cudatoolkit curl --force
     source deactivate
     echo ' '
@@ -349,7 +351,7 @@ cd ../
 # Torchfile
 pip install --upgrade --no-deps torchfile
 
-# Pyro (patched to avoid that PyPandoc failures make fail the whole install process)
+# Pyro
 git clone --recursive https://github.com/uber/pyro
 cd pyro
 pip install --upgrade --no-deps .
@@ -464,7 +466,6 @@ cd ../
 # Paysage
 git clone --recursive https://github.com/drckf/paysage.git
 cd paysage
-rm ./requirements.txt   # Precautionary measure
 pip install --upgrade --no-deps .
 cd ../
 
@@ -474,8 +475,8 @@ cd pyvarinf
 pip install --upgrade --no-deps .
 cd ../
 
-# pytorch_fft (NOT COMPATIBLE ANYMORE!)
-# pip install --upgrade --no-deps pytorch-fft
+# pytorch_fft (MAY NOT INSTALL!)
+pip install --upgrade --no-deps pytorch-fft
 
 # TensorBoardX
 pip install --upgrade --no-deps tensorboardX
@@ -538,11 +539,11 @@ cd pytorch_geometric
 pip install --upgrade --no-deps .
 cd ../
 
-# PyTorch BinCount (NOT COMPATIBLE ANYMORE!)
-#git clone --recursive https://github.com/rusty1s/pytorch_bincount.git
-#cd pytorch_bincount
-#python setup.py install
-#cd ../
+# PyTorch BinCount (MAY NOT INSTALL!)
+git clone --recursive https://github.com/rusty1s/pytorch_bincount.git
+cd pytorch_bincount
+pip install --upgrade --no-deps .
+cd ../
 
 # PyTorch Sparse
 git clone --recursive https://github.com/rusty1s/pytorch_sparse.git
@@ -787,7 +788,7 @@ cd goftests
 pip install --upgrade --no-deps .
 cd ../
 
-# Distributions
+# Distributions (MAY NOT INSTALL!)
 pip install --upgrade --no-deps distributions
 
 # Opt_Einsum
@@ -799,6 +800,54 @@ cd ../
 # TreeCat
 git clone --recursive https://github.com/posterior/treecat.git
 cd treecat
+pip install --upgrade --no-deps .
+cd ../
+
+
+## SO-CALLED "VARIOUS TOOLS"! ;-) ##
+
+# pysvihmm (Foster's branch)
+git clone --recursive https://github.com/ae-foster/pysvihmm.git
+cd pysvihmm
+python setup.py build_ext --inplace
+python setup.py build_ext --inplace
+pip install --upgrade --no-deps .
+pip install --upgrade --no-deps .
+cd ../
+
+# MultiNEAT
+export SELF_PREV_MNBUILD="$MN_BUILD"
+export MN_BUILD=boost
+git clone --recursive https://github.com/peter-ch/MultiNEAT.git
+cd MultiNEAT
+python setup.py build_ext
+python setup.py build_ext
+pip install --upgrade --no-deps .
+pip install --upgrade --no-deps .
+export MN_BUILD="$SELF_PREV_MNBUILD"
+cd ../
+
+# DEER (VinF)
+git clone --recursive https://github.com/VinF/deer.git
+cd deer
+pip install --upgrade --no-deps .
+cd ../
+
+# Matchbox (Salesforce)
+git clone --recursive https://github.com/salesforce/matchbox.git
+cd matchbox
+pip install --upgrade --no-deps .
+cd ../
+
+# EchoTorch (may not work!)
+git clone --recursive https://github.com/nschaetti/EchoTorch.git
+cd EchoTorch
+pip install --upgrade --no-deps .
+cd ../
+
+# TorchLanguage (may not work!)
+git clone --recursive https://github.com/nschaetti/TorchLanguage.git
+cd TorchLanguage
 pip install --upgrade --no-deps .
 cd ../
 
