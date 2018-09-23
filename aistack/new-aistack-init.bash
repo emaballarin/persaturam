@@ -475,8 +475,8 @@ cd pyvarinf
 pip install --upgrade --no-deps .
 cd ../
 
-# pytorch_fft (MAY NOT INSTALL!)
-pip install --upgrade --no-deps pytorch-fft
+# pytorch_fft (MAY NOT INSTALL! EVEN DEPRECATED?)
+# pip install --upgrade --no-deps pytorch-fft
 
 # TensorBoardX
 pip install --upgrade --no-deps tensorboardX
