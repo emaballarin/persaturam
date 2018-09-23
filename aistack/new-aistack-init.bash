@@ -1,6 +1,6 @@
 #!/bin/bash
 ########################################
-##   AIStack, v. 0.9.0 (23/09/2018)   ##
+##   AIStack, v. 0.9.1 (23/09/2018)   ##
 ########################################
 #
 # A deterministic, Anaconda-powered, PyTorch-based, AI research deployment
@@ -134,7 +134,7 @@ if [ "$SELF_FIRSTRUN" = "1" ]; then
     # Install dependencies from Anaconda, as much as possible
     source $SELF_CEACT_COMMAND $SELF_CONDA_ENV_NAME
     echo ' '
-    conda install -y intelpython numpy scipy matplotlib sympy scikit-learn pyyaml typing six pandas networkx requests jpeg zlib tornado cython daal h5py hdf5 pillow pycparser isort ply jinja2 arrow singledispatch mypy mypy_extensions dask mkl-devel mkl-dnn mkl-include mkl mkl_fft mkl_random icc_rt tbb greenlet protobuf libprotobuf psutil intervals nose numba cryptography glib gmp icu idna flask libffi libgcc libgcc-ng libgfortran-ng libstdcxx-ng asn1crypto openssl pyopenssl openmp theano seaborn cffi future affine zeromq setuptools pip pydaal yaml pydot backports statsmodels llvmlite graphviz openpyxl certifi click cloudpickle execnet more-itertools mpmath numexpr rope simplegeneric sqlite tcl tk pcre pexpect ptyprocess py pytables python-dateutil keras-gpu==2.2.2 tensorflow-gpu==1.10 fastrlock filelock theano==1.1 pyzmq tqdm autograd scikit-image scikit-optimize jupyter jupyter_client jupyter_console jupyter_core jupyterlab jupyterlab_launcher notebook ipykernel ipyparallel ipython ipython_genutils ipywidgets ninja widgetsnbextension pytest pytest-runner websocket-client nbconvert nbformat nbsphinx nbstripout nbval sphinx sphinxcontrib sphinxcontrib-websupport sphinx_rtd_theme imageio imagehash ipdb numpydoc pytest-cov flake8 pytest-xdist pybind11 yapf pypandoc pep8-naming wheel virtualenv mock pytest-mock tox spacy tabulate attrs jedi typing-extensions pytest-runner recommonmark sphinx-autobuild sortedcontainers sortedcollections pycodestyle progressbar2 coveralls bumpversion scrapy coverage xarray docker-pycreds appdirs packaging pyparsing urllib3 pytest-timeout quantities ordered-set pyflakes libunwind autopep8 spyder-kernels cartopy astropy termcolor terminado pydotplus opencv markdown markupsafe livereload pyopengl httplib2 pathtools pylint pyqt jsonschema parso path.py patsy pickleshare qt terminado python-dateutil wrapt cytoolz dill eigen sparsehash jupyter_contrib_nbextensions bcolz feather-format plotnine msgpack-python keras-preprocessing keras-applications ansiwrap boto3 vcrpy requests metakernel cached-property apscheduler sqlalchemy alembic gevent peewee testfixtures pbr traitlets pytz django django-extensions faker pyscaffold dask-ml scikit-mdr skrebate ncurses chardet cuda92 magma-cuda92 glfw3 docopt botocore pep8 jsonpickle pymc3 pycuda pytools nose2 mako pluggy atomicwrites pdbpp wmctrl luigi metis parmetis gperftools joblib gast astor -c intel -c conda-forge -c pytorch -c menpo -c lukepfister
+    conda install -y intelpython numpy scipy matplotlib sympy scikit-learn pyyaml typing six pandas networkx requests jpeg zlib tornado cython daal h5py hdf5 pillow pycparser isort ply jinja2 arrow singledispatch mypy mypy_extensions dask mkl-devel mkl-dnn mkl-include mkl mkl_fft mkl_random icc_rt tbb greenlet protobuf libprotobuf psutil intervals nose numba cryptography glib gmp icu idna flask libffi libgcc libgcc-ng libgfortran-ng libstdcxx-ng asn1crypto openssl pyopenssl openmp theano seaborn cffi future affine zeromq setuptools pip pydaal yaml pydot backports statsmodels llvmlite graphviz openpyxl certifi click cloudpickle execnet more-itertools mpmath numexpr rope simplegeneric sqlite tcl tk pcre pexpect ptyprocess py pytables python-dateutil keras-gpu==2.2.2 tensorflow-gpu==1.10 fastrlock filelock theano==1.1 pyzmq tqdm autograd scikit-image scikit-optimize jupyter jupyter_client jupyter_console jupyter_core jupyterlab jupyterlab_launcher notebook ipykernel ipyparallel ipython ipython_genutils ipywidgets ninja widgetsnbextension pytest pytest-runner websocket-client nbconvert nbformat nbsphinx nbstripout nbval sphinx sphinxcontrib sphinxcontrib-websupport sphinx_rtd_theme imageio imagehash ipdb numpydoc pytest-cov flake8 pytest-xdist pybind11 yapf pypandoc pep8-naming wheel virtualenv mock pytest-mock tox spacy tabulate attrs jedi typing-extensions pytest-runner recommonmark sphinx-autobuild sortedcontainers sortedcollections pycodestyle progressbar2 coveralls bumpversion scrapy coverage xarray docker-pycreds appdirs packaging pyparsing urllib3 pytest-timeout quantities ordered-set pyflakes libunwind autopep8 spyder-kernels cartopy astropy termcolor terminado pydotplus opencv markdown markupsafe livereload pyopengl httplib2 pathtools pylint pyqt jsonschema parso path.py patsy pickleshare qt terminado python-dateutil wrapt cytoolz dill eigen sparsehash jupyter_contrib_nbextensions bcolz feather-format plotnine msgpack-python keras-preprocessing keras-applications ansiwrap boto3 vcrpy requests metakernel cached-property apscheduler sqlalchemy alembic gevent peewee testfixtures pbr traitlets pytz django django-extensions faker pyscaffold dask-ml scikit-mdr skrebate ncurses chardet cuda92 magma-cuda92 glfw3 docopt botocore pep8 jsonpickle pymc3 pycuda pytools nose2 mako pluggy atomicwrites pdbpp wmctrl luigi metis parmetis gperftools joblib gast astor emcee paramz plotly pymongo -c intel -c conda-forge -c pytorch -c menpo -c lukepfister
     conda remove -y cmake cudatoolkit curl --force
     source deactivate
     echo ' '
@@ -803,10 +803,9 @@ cd treecat
 pip install --upgrade --no-deps .
 cd ../
 
+### ### ###
 
-## SO-CALLED "VARIOUS TOOLS"! ;-) ##
-
-# pysvihmm (Foster's branch)
+# pysvihmm (Foster's branch) - MAY NOT INSTALL!
 git clone --recursive https://github.com/ae-foster/pysvihmm.git
 cd pysvihmm
 python setup.py build_ext --inplace
@@ -850,6 +849,69 @@ git clone --recursive https://github.com/nschaetti/TorchLanguage.git
 cd TorchLanguage
 pip install --upgrade --no-deps .
 cd ../
+
+
+## ADDITIONAL GAUSSIAN PROCESSES AND BAYESIAN INFERENCE AND PROBABILITY ESTIMATION ##
+
+# PyDIRECT
+git clone --recursive https://bitbucket.org/amitibo/pydirect
+cd pydirect
+pip install --upgrade --no-deps .
+cd ../
+
+# SOBOL-SEQ
+git clone --recursive https://github.com/naught101/sobol_seq.git
+cd sobol_seq
+pip install --upgrade --no-deps .
+cd ../
+
+# PyCMA
+pip install --upgrade --no-deps cma
+
+# PyDOE
+git clone --recursive https://github.com/tisimst/pyDOE.git
+cd pyDOE
+pip install --upgrade --no-deps .
+cd ../
+
+# GPy
+pip install --upgrade --no-deps GPy
+
+# GPyOpt
+pip install --upgrade --no-deps gpyopt
+
+# GPclust
+git clone --recursive https://github.com/SheffieldML/GPclust.git
+cd GPclust
+pip install --upgrade --no-deps .
+cd ../
+
+# DeepGP
+git clone --recursive https://github.com/SheffieldML/PyDeepGP.git
+cd PyDeepGP
+pip install --upgrade --no-deps .
+cd ../
+
+
+## HIPS ##
+
+# hips-lib
+git clone --recursive https://github.com/HIPS/hips-lib.git
+cd hips-lib
+pip install --upgrade --no-deps .
+cd ../
+
+# SpearMint
+git clone --recursive https://github.com/HIPS/Spearmint.git
+cd Spearmint
+pip install --upgrade --no-deps .
+cd ../
+
+# PyBigWig
+pip install --upgrade --no-deps pyBigWig
+
+# PySAM
+pip install --upgrade --no-deps pysam
 
 
 # Fix the nasty cmake/ccmake bug
