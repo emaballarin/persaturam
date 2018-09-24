@@ -951,6 +951,13 @@ python setup.py develop
 
 cd "$SELF_BIOPH_IAMIN"
 
+# BayesPy
+git clone --recursive https://github.com/bayespy/bayespy.git
+cd bayespy
+pip install --upgrade --no-deps .
+cd ../
+
+
 # Fix the nasty cmake/ccmake bug
 source deactivate
 rm -f "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/cmake"
