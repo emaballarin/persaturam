@@ -717,6 +717,9 @@ cd obstacle-env
 pip install --upgrade --no-deps .
 cd ../
 
+# A somehow useful tool
+pip install --upgrade --no-deps numcompress
+
 
 ###############################################
 ######## AUTOMATIC FEATURE ENGINEERING ########
