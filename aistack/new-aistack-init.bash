@@ -1,68 +1,63 @@
 #!/bin/bash
-########################################
-##   AIStack, v. 0.9.3 (24/09/2018)   ##
-########################################
+#########################################
+##   AIStack, v. 0.10.0 (29/09/2018)   ##
+#########################################
 #
-# A deterministic, Anaconda-powered, PyTorch-based, AI research deployment
-# installer, with a focus on deep learning, deep probabilistic programming and
-# inference (Bayesian included), reinforcement learning and AI-powered
-# science/experimentation.
+# A deterministic and reliable bootstrapper for an AI/ML research environment
+# mainly focused on deep learning, deep probabilistic programming, Bayesian
+# learning and inference, generative models, and AI-powered science and
+# experimentation.
+# Built around PyTorch, MXNet, Chainer and ONNX. Powered by Anaconda and PIP.
+# Inspired by this blog post by Borealis AI:
+# https://www.borealisai.com/en/blog/standardizing-machine-learning-framework-applied-research/
 #
 # (c) 2018 Emanuele Ballarin <emanuele@ballarin.cc>
-# Released under the GNU-LGPL v3.
+# Released under the GNU-LGPL3.
 #
 #
 # §§ REQUIREMENTS §§
 #
-# - Relatively recent Linux operating connected to the Internet;
-# - Bash v.4;
-# - Anaconda Python distribution (i.e. Anaconda, MiniConda, IntelConda, ...);
-# - An Intel processor (recommended: series 6 or better) with AVX2 support;
-# - Intel MKL 2018 (or 2019 beta) full library, or Parallel Studio XE 2018/2019;
-# - Intel MKL-DNN (recommended: self-compiled with Intel Parallel Studio XE);
-# - NVidia CUDA v.9.0 or better;
-# - NVidia CUDNN v.7.0 or better;
+# - A relatively recent Linux operating system, connected to the Internet;
+# - Bash >= 4;
+# - An Anaconda Python distribution (i.e. Anaconda, MiniConda, IntelConda, ...);
+# - An Intel processor (recommended: series 6 or newer) with AVX2 support;
+# - Intel MKL 2018/2019 full library, or Parallel Studio XE 2018/2019;
+# - Intel MKL-DNN (recommended: self-compiled with a recent Intel compiler);
+# - NVidia CUDA v.9.0 (recommended: 9.2.x) or newer;
+# - NVidia CUDNN v.7.0 (recommended: 7.4.x) or newer;
 # - NVidia NCCL (whichever version compatible with CUDA);
-# - Intel and NVidia "stuff" needs to be correctly sourced as per install guide(s);
-# - OpenMPI v.3 (recommended: self-compiled with optimizations);
-# - Kitware's CMAKE v.3.11 (if unavailable it needs to be source-compiled);
-# - GNU Compiler Suite v.7 (C/C++/Fortran), with executables in $PATH;
-# - GNU MultiPrecision Library (whicever version compatible);
-# - GNU LibTool v.2.4 or better;
-# - GNU AutoMake v.1.15 or better;
-# - Approximately 2.5 hours of time (may take more with older CPUs);
+# - Intel and NVidia SW/libraries need to be correctly sourced as per install notes;
+# - OpenMPI >= 3 (recommended: self-compiled with all available optimizations);
+# - Kitware's CMAKE >= 3.11 (if unavailable it needs to be source-compiled);
+# - GNU Compiler Suite v.7 (C/C++/Fortran), with executables available in $PATH;
+# - GNU MultiPrecision Library (whichever version compatible with the compilers);
+# - GNU LibTool >= 2.4;
+# - GNU AutoMake >= 1.15;
+# - Curl >= 7, with HTTPS support.
 #
-# §§ HACKING §§
-# Feel free to edit this script and experiment with it. However, it should be
-# noted that the procedures involved partially push the standard Conda use-case
-# at the edges (i.e. forced uninstalls, symlinking system deps inside Conda...).
-# Expect some adventures if you substantially diverge from the already traced
-# path. Don't be scared, though! :-)
-#
-# §§ ADDITIONAL NOTES §§
+# §§ ADDITIONAL NOTES ABOUT SOFTWARE §§
 #
 # "MAY NOT INSTALL" -> The piece of software may fail installation and notify it.
 #                      This impacts only that single software installation and
 #                      can be ignored.
 #
-# "MAY NOT WORK"    -> The piece of software installs succseefully, but may
+# "MAY NOT WORK"    -> The piece of software installs successfully, but may
 #                      crash or fail when imported and/or directly used. This
-#                      is a consequence of unsupported PyTorch version or lack
-#                      of maintainance. This impacts only that single software
-#                      installation and can be ignored.
+#                      is a consequence of an unsupported PyTorch version or
+#                      lack of maintainance. This impacts only that single
+#                      software installation and can be ignored.
 ###
 
 
 ## USER-EXPOSED CONFIGURATION ##
 
 # PyTorch version:
-#export SELF_PTBRANCH_V="v0.4.1"                                         # The version of PyTorch you want to install ("master" for the latest unstable)
-export SELF_PTBRANCH_V="master"
+export SELF_PTBRANCH_V="master"                                         # The version of PyTorch you want to install ("master" for the latest unstable)
 
 # Anaconda
 export SELF_CEACT_COMMAND="intelactivate"                               # Command used to activate conda environments (usually "activate" as in "source activate ...")
-export SELF_CONDA_ENV_NAME="aistack"                                    # Name of Conda environment to contain this setup
-export SELF_CONDA_ENV_PATH="$HOME/intel/intelpython3/envs/"             # Path under which given command(s) will create Anaconda environments (must be manually specified due to possible multiple conda binaries installed!)
+export SELF_CONDA_ENV_NAME="aistack"                                    # Name of Conda environment to contain the environment setup (must be new)
+export SELF_CONDA_ENV_PATH="$HOME/intel/intelpython3/envs/"             # Path under which given command(s) will create Anaconda environments (must be manually specified due to possible multiple conda environment folders)
 
 # CPU & Intel Accelerators
 export SELF_NRTHREADS="8"                                               # Number of CPU threads to use in the building process
@@ -71,7 +66,7 @@ export SELF_MKLDNN_PATH="/usr/local/lib/"                               # Extern
                                                                         # If libmkldnn.so has not been built from source, $SELF_MKLDNN_PATH/libmklml.so must also be valid.
 
 # GPU, CUDA & NVidia Accelerators
-export SELF_CUDARCH="5.0"                                               # Nvidia CUDA compute capability (depends on GPU) in the form 'x.y' (with x, y numbers)
+export SELF_CUDARCH="5.0"                                               # Nvidia CUDA compute capability (depends on GPU) in the form 'x.y' (with x, y integers)
 export SELF_CUDA_ROOT="/opt/cuda/"                                      # External path for the root directory of the CUDA Toolkit
 export SELF_CUDNN_PATH="/opt/cuda/lib64/"                               # External path of 'libcudnn.so' such that $SELF_CUDNN_PATH/libcudnn.so is valid
 
@@ -79,7 +74,7 @@ export SELF_CUDNN_PATH="/opt/cuda/lib64/"                               # Extern
 export SELF_MPIROOT="/opt/openmpi/"                                             # Base directory of OpenMPI or other MPI implementation (must contain /bin, /lib, /include... and the such)
 
 # Execution flags
-export SELF_FIRSTRUN="1"                                                # Set to "1" if you want to install a new environment, to "0" in all other cases
+export SELF_FIRSTRUN="1"                                                        # Set to "1" if you want to install a new environment, to "0" in all other cases.
 
 
 # Prepare local temporary directory
@@ -134,7 +129,7 @@ if [ "$SELF_FIRSTRUN" = "1" ]; then
     # Install dependencies from Anaconda, as much as possible
     source $SELF_CEACT_COMMAND $SELF_CONDA_ENV_NAME
     echo ' '
-    conda install -y intelpython numpy scipy matplotlib sympy scikit-learn pyyaml typing six pandas networkx requests jpeg zlib tornado cython daal h5py hdf5 pillow pycparser isort ply jinja2 arrow singledispatch mypy mypy_extensions dask mkl-devel mkl-dnn mkl-include mkl mkl_fft mkl_random icc_rt tbb greenlet protobuf libprotobuf psutil intervals nose numba cryptography glib gmp icu idna flask libffi libgcc libgcc-ng libgfortran-ng libstdcxx-ng asn1crypto openssl pyopenssl openmp theano seaborn cffi future affine zeromq setuptools pip pydaal yaml pydot backports statsmodels llvmlite graphviz openpyxl certifi click cloudpickle execnet more-itertools mpmath numexpr rope simplegeneric sqlite tcl tk pcre pexpect ptyprocess py pytables python-dateutil keras-gpu==2.2.2 tensorflow-gpu==1.10 fastrlock filelock theano==1.1 pyzmq tqdm autograd scikit-image scikit-optimize jupyter jupyter_client jupyter_console jupyter_core jupyterlab jupyterlab_launcher notebook ipykernel ipyparallel ipython ipython_genutils ipywidgets ninja widgetsnbextension pytest pytest-runner websocket-client nbconvert nbformat nbsphinx nbstripout nbval sphinx sphinxcontrib sphinxcontrib-websupport sphinx_rtd_theme imageio imagehash ipdb numpydoc pytest-cov flake8 pytest-xdist pybind11 yapf pypandoc pep8-naming wheel virtualenv mock pytest-mock tox spacy tabulate attrs jedi typing-extensions pytest-runner recommonmark sphinx-autobuild sortedcontainers sortedcollections pycodestyle progressbar2 coveralls bumpversion scrapy coverage xarray docker-pycreds appdirs packaging pyparsing urllib3 pytest-timeout quantities ordered-set pyflakes libunwind autopep8 spyder-kernels cartopy astropy termcolor terminado pydotplus opencv markdown markupsafe livereload pyopengl httplib2 pathtools pylint pyqt jsonschema parso path.py patsy pickleshare qt terminado python-dateutil wrapt cytoolz dill eigen sparsehash jupyter_contrib_nbextensions bcolz feather-format plotnine msgpack-python keras-preprocessing keras-applications ansiwrap boto3 vcrpy requests metakernel cached-property apscheduler sqlalchemy alembic gevent peewee testfixtures pbr traitlets pytz django django-extensions faker pyscaffold dask-ml scikit-mdr skrebate ncurses chardet cuda92 magma-cuda92 glfw3 docopt botocore pep8 jsonpickle pymc3 pycuda pytools nose2 mako pluggy atomicwrites pdbpp wmctrl luigi metis parmetis gperftools joblib gast astor emcee paramz plotly pymongo pyspark parquet-cpp fastparquet pyarrow diskcache alabaster codecov mysql-connector-python pymysql mysqlclient rdflib psycopg2 reportlab libnetcdf netcdf4 h5netcdf mmtf-python gsd griddataformats -c intel -c conda-forge -c pytorch -c menpo -c lukepfister
+    conda install -y intelpython numpy scipy matplotlib sympy scikit-learn pyyaml typing six pandas networkx requests jpeg zlib tornado cython daal h5py hdf5 pillow pycparser isort ply jinja2 arrow singledispatch mypy mypy_extensions dask mkl-devel mkl-dnn mkl-include mkl mkl_fft mkl_random icc_rt tbb greenlet protobuf libprotobuf psutil intervals nose numba cryptography glib gmp icu idna flask libffi libgcc libgcc-ng libgfortran-ng libstdcxx-ng asn1crypto openssl pyopenssl openmp theano seaborn cffi future affine zeromq setuptools pip pydaal yaml pydot backports statsmodels llvmlite graphviz openpyxl certifi click cloudpickle execnet more-itertools mpmath numexpr rope simplegeneric sqlite tcl tk pcre pexpect ptyprocess py pytables python-dateutil fastrlock filelock theano==1.1 pyzmq tqdm autograd scikit-image scikit-optimize jupyter jupyter_client jupyter_console jupyter_core jupyterlab jupyterlab_launcher notebook ipykernel ipyparallel ipython ipython_genutils ipywidgets ninja widgetsnbextension pytest pytest-runner websocket-client nbconvert nbformat nbsphinx nbstripout nbval sphinx sphinxcontrib sphinxcontrib-websupport sphinx_rtd_theme imageio imagehash ipdb numpydoc pytest-cov flake8 pytest-xdist pybind11 yapf pypandoc pep8-naming wheel virtualenv mock pytest-mock tox spacy tabulate attrs jedi typing-extensions pytest-runner recommonmark sphinx-autobuild sortedcontainers sortedcollections pycodestyle progressbar2 coveralls bumpversion scrapy coverage xarray docker-pycreds appdirs packaging pyparsing urllib3 pytest-timeout quantities ordered-set pyflakes libunwind autopep8 spyder-kernels cartopy astropy termcolor terminado pydotplus opencv markdown markupsafe livereload pyopengl httplib2 pathtools pylint pyqt jsonschema parso path.py patsy pickleshare qt terminado python-dateutil wrapt cytoolz dill eigen sparsehash jupyter_contrib_nbextensions bcolz feather-format plotnine msgpack-python ansiwrap boto3 vcrpy requests metakernel cached-property apscheduler sqlalchemy alembic gevent peewee testfixtures pbr traitlets pytz django django-extensions faker pyscaffold dask-ml scikit-mdr skrebate ncurses chardet cuda92 magma-cuda92 glfw3 docopt botocore pep8 jsonpickle pymc3 pycuda pytools nose2 mako pluggy atomicwrites pdbpp wmctrl luigi metis parmetis gperftools joblib gast astor emcee paramz plotly pymongo pyspark parquet-cpp fastparquet pyarrow diskcache alabaster codecov mysql-connector-python pymysql mysqlclient rdflib psycopg2 reportlab libnetcdf netcdf4 h5netcdf mmtf-python gsd griddataformats absl-py grpcio werkzeug -c intel -c conda-forge -c pytorch -c menpo -c lukepfister
     conda remove -y cmake cudatoolkit curl --force
     source deactivate
     echo ' '
@@ -160,7 +155,7 @@ ln -s "$(which ccmake)" "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/ccmake"
 source $SELF_CEACT_COMMAND $SELF_CONDA_ENV_NAME
 
 
-# If nonexistent, link MAGMA system-wide (it's hard to produce a *.a shared library correctly compiled with -fPIC) and make it discoverable
+# If nonexistent, link MAGMA system-wide and make it discoverable
 if [ ! -f /usr/local/lib/libmagma.a ]; then
     if [ ! -f /usr/lib/libmagma.a ]; then
         sudo ln -s "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/lib/libmagma.a" "/usr/local/lib/libmagma.a"
@@ -578,10 +573,10 @@ cd hyperlearn
 pip install --upgrade --no-deps .
 cd ../
 
-# PyProb (K. Cranmer et al., 2018), dependency-stripped version
+# PyProb (K. Cranmer et al., 2018)
 cd $SELF_BASEDIR
 cd ./extras
-pip install --upgrade --no-deps git+https://github.com/emaballarin/pyprob.git
+pip install --upgrade --no-deps git+https://github.com/probprog/pyprob.git
 
 export SELF_SUSPENDED_EXEC_PWD="$(pwd)"
 
@@ -741,10 +736,13 @@ pip install --upgrade --no-deps tpot
 #########################
 
 
-# MxNet (by Apache Incubator)
-pip install --upgrade --no-deps mxnet-cu92mkl
+# MxNet, GluonCV, GluonNLP (by Apache Incubator)
+pip install --upgrade --no-deps --pre mxnet-cu92mkl
+pip install --upgrade --no-deps --pre gluoncv
+pip install --upgrade --no-deps --pre gluonnlp
 
-# TensorLy (TensorFlow, PyTorch, NumPy, MxNet, CuPy)
+
+# TensorLy (for PyTorch, NumPy, MxNet, CuPy)
 git clone --recursive https://github.com/tensorly/tensorly
 cd tensorly
 pip install --upgrade --no-deps .
@@ -891,6 +889,12 @@ cd PyDeepGP
 pip install --upgrade --no-deps .
 cd ../
 
+# BayesPy
+git clone --recursive https://github.com/bayespy/bayespy.git
+cd bayespy
+pip install --upgrade --no-deps .
+cd ../
+
 
 ## HIPS ##
 
@@ -920,7 +924,6 @@ HOROVOD_GPU_ALLREDUCE=NCCL pip install --no-cache-dir --upgrade --no-deps horovo
 
 # Petastorm
 pip install --upgrade --no-deps petastorm
-
 ## ## ##
 
 
@@ -933,29 +936,6 @@ pip install --upgrade --no-deps biopython
 pip install --upgrade --no-deps MDAnalysis
 pip install --upgrade --no-deps MDAnalysisTests
 pip install --upgrade --no-deps pmda
-
-export SELF_BIOPH_IAMIN="$(pwd)"
-
-# Calico's Basenji #
-export SELF_BASENJI_INNERDEPL="$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/basenji"
-mkdir -p "$SELF_BASENJI_INNERDEPL"
-cd "$SELF_BASENJI_INNERDEPL"
-git clone --recursive https://github.com/calico/basenji.git
-cd basenji
-wget --tries=0 --retry-connrefused --continue --progress=bar --show-progress --timeout=30 --dns-timeout=30 --random-wait https://ballarin.cc/mirrorsrv/aistack/basenji-depstrip.patch
-git apply ./basenji-depstrip.patch
-python setup.py develop
-
-## ## ##
-
-
-cd "$SELF_BIOPH_IAMIN"
-
-# BayesPy
-git clone --recursive https://github.com/bayespy/bayespy.git
-cd bayespy
-pip install --upgrade --no-deps .
-cd ../
 
 
 # Fix the nasty cmake/ccmake bug
