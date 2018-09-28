@@ -744,6 +744,9 @@ pip install --upgrade --no-deps --pre mxnet-cu92mkl
 pip install --upgrade --no-deps --pre gluoncv
 pip install --upgrade --no-deps --pre gluonnlp
 
+# Keras-MXNet
+pip install --upgrade --no-deps keras-mxnet keras_applications==1.0.4 keras_preprocessing==1.0.1
+
 
 # TensorLy (for PyTorch, NumPy, MxNet, CuPy)
 git clone --recursive https://github.com/tensorly/tensorly
