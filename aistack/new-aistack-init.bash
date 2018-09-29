@@ -1,7 +1,7 @@
 #!/bin/bash
-#########################################
-##   AIStack, v. 0.10.1 (29/09/2018)   ##
-#########################################
+###########################################
+##   AIStack, v. 0.10.1.1 (29/09/2018)   ##
+###########################################
 #
 # A deterministic and reliable bootstrapper for an AI/ML research environment
 # mainly focused on deep learning, deep probabilistic programming, Bayesian
@@ -34,6 +34,8 @@
 # - GNU LibTool >= 2.4;
 # - GNU AutoMake >= 1.15;
 # - Curl >= 7, with HTTPS support.
+# - Git >= 2.18
+# - Mercurial (hg) >= 4.7
 #
 # §§ ADDITIONAL NOTES ABOUT SOFTWARE §§
 #
@@ -436,7 +438,7 @@ cd carl
 pip install --upgrade --no-deps .
 cd ../
 
-# Facebook SparseConvNet
+# Facebook SparseConvNet (MAY NOT INSTALL!)
 git clone --recursive https://github.com/facebookresearch/SparseConvNet.git
 cd SparseConvNet
 rm -rf build/ dist/ sparseconvnet.egg-info sparseconvnet_SCN*.so    # Port of script ./build.sh
@@ -857,7 +859,7 @@ cd ../
 ## ADDITIONAL GAUSSIAN PROCESSES AND BAYESIAN INFERENCE AND PROBABILITY ESTIMATION ##
 
 # PyDIRECT
-git clone --recursive https://bitbucket.org/amitibo/pydirect
+hg clone https://bitbucket.org/amitibo/pydirect pydirect
 cd pydirect
 pip install --upgrade --no-deps .
 cd ../
@@ -931,8 +933,8 @@ pip install --upgrade --no-deps pysam
 
 ## UBER EXPERIMENTS ##
 
-# Horovod (TF+Keras+PyTorch)
-HOROVOD_GPU_ALLREDUCE=NCCL pip install --no-cache-dir --upgrade --no-deps horovod
+## Horovod (Keras+PyTorch) - NOT USEFUL AS OF NOW!
+#HOROVOD_GPU_ALLREDUCE=NCCL pip install --no-cache-dir --upgrade --no-deps horovod
 
 # Petastorm
 pip install --upgrade --no-deps petastorm
@@ -963,13 +965,16 @@ pip install --upgrade --no-deps .
 cd ../
 
 # Spherical VAEs
-cd clone --recursive https://github.com/nicola-decao/s-vae-pytorch.git
+git clone --recursive https://github.com/nicola-decao/s-vae-pytorch.git
 cd s-vae-pytorch
 pip install --upgrade --no-deps .
 cd ../
 
 # Albumentations (+ ImgAug)
-pip install --upgrade --no-deps git+https://github.com/aleju/imgaug
+git clone --recursive https://github.com/aleju/imgaug.git
+cd imgaug
+pip install --upgrade --no-deps .
+cd ../
 pip install --upgrade --no-deps git+https://github.com/albu/albumentations
 
 
