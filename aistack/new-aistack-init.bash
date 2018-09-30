@@ -1,7 +1,7 @@
 #!/bin/bash
-###########################################
-##   AIStack, v. 0.10.1.1 (29/09/2018)   ##
-###########################################
+#######################################
+##   AIStack, v. 0.11 (29/09/2018)   ##
+#######################################
 #
 # A deterministic and reliable bootstrapper for an AI/ML research environment
 # mainly focused on deep learning, deep probabilistic programming, Bayesian
@@ -1017,6 +1017,11 @@ jupyter nbextension enable nteract_on_jupyter
 jupyter nbextension enable -py nteract_on_jupyter
 jupyter serverextension enable nteract_on_jupyter
 jupyter serverextension enable -py nteract_on_jupyter
+
+
+# Fix a problem with Anaconda-shipped Kerberos libraries
+rm -R -f "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/../lib/libkrb5.so.3"
+rm -R -f "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/../lib/libk5crypto.so.3"
 
 
 # Success message and final recommendations

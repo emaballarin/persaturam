@@ -82,5 +82,9 @@ jupyter nbextension enable -py nteract_on_jupyter
 jupyter serverextension enable nteract_on_jupyter
 jupyter serverextension enable -py nteract_on_jupyter
 
+# Fix Kerberos problem
+rm -R -f "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/../lib/libkrb5.so.3"
+rm -R -f "$SELF_CONDA_ENV_PATH/$SELF_CONDA_ENV_NAME/bin/../lib/libk5crypto.so.3"
+
 ## END SCRIPT ##
 cd "$SELF_INVOKEDIR_J"
