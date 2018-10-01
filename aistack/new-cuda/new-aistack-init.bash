@@ -56,6 +56,9 @@
 # PyTorch version:
 export SELF_PTBRANCH_V="master"                                         # The version of PyTorch you want to install ("master" for the latest unstable)
 
+# FAST.AI version
+export SELF_FASTAI_V="1.0.0b7"                                          # The version of the FAST.AI library that you want to install
+
 # Anaconda
 export SELF_CEACT_COMMAND="intelactivate"                               # Command used to activate conda environments (usually "activate" as in "source activate ...")
 export SELF_CONDA_ENV_NAME="aistack"                                    # Name of Conda environment to contain the environment setup (must be new)
@@ -131,7 +134,7 @@ if [ "$SELF_FIRSTRUN" = "1" ]; then
     # Install dependencies from Anaconda, as much as possible
     source $SELF_CEACT_COMMAND $SELF_CONDA_ENV_NAME
     echo ' '
-    conda install -y intelpython numpy scipy matplotlib sympy scikit-learn pyyaml typing six pandas networkx requests jpeg zlib tornado cython daal h5py hdf5 pillow pycparser isort ply jinja2 arrow singledispatch mypy mypy_extensions dask mkl-devel mkl-dnn mkl-include mkl mkl_fft mkl_random icc_rt tbb greenlet protobuf libprotobuf psutil intervals nose numba cryptography glib gmp icu idna flask libffi libgcc libgcc-ng libgfortran-ng libstdcxx-ng asn1crypto openssl pyopenssl openmp theano seaborn cffi future affine zeromq setuptools pip pydaal yaml pydot backports statsmodels llvmlite graphviz openpyxl certifi click cloudpickle execnet more-itertools mpmath numexpr rope simplegeneric sqlite tcl tk pcre pexpect ptyprocess py pytables python-dateutil fastrlock filelock theano==1.1 pyzmq tqdm autograd scikit-image scikit-optimize jupyter jupyter_client jupyter_console jupyter_core jupyterlab jupyterlab_launcher notebook ipykernel ipyparallel ipython ipython_genutils ipywidgets ninja widgetsnbextension pytest pytest-runner websocket-client nbconvert nbformat nbsphinx nbstripout nbval sphinx sphinxcontrib sphinxcontrib-websupport sphinx_rtd_theme imageio imagehash ipdb numpydoc pytest-cov flake8 pytest-xdist pybind11 yapf pypandoc pep8-naming wheel virtualenv mock pytest-mock tox spacy tabulate attrs jedi typing-extensions pytest-runner recommonmark sphinx-autobuild sortedcontainers sortedcollections pycodestyle progressbar2 coveralls bumpversion scrapy coverage xarray docker-pycreds appdirs packaging pyparsing urllib3 pytest-timeout quantities ordered-set pyflakes libunwind autopep8 spyder-kernels cartopy astropy termcolor terminado pydotplus opencv markdown markupsafe livereload pyopengl httplib2 pathtools pylint pyqt jsonschema parso path.py patsy pickleshare qt terminado python-dateutil wrapt cytoolz dill eigen sparsehash jupyter_contrib_nbextensions bcolz feather-format plotnine msgpack-python ansiwrap boto3 vcrpy requests metakernel cached-property apscheduler sqlalchemy alembic gevent peewee testfixtures pbr traitlets pytz django django-extensions faker pyscaffold dask-ml scikit-mdr skrebate ncurses chardet cuda92 magma-cuda92 glfw3 docopt botocore pep8 jsonpickle pymc3 pycuda pytools nose2 mako pluggy atomicwrites pdbpp wmctrl luigi metis parmetis gperftools joblib gast astor emcee paramz plotly pymongo pyspark parquet-cpp fastparquet pyarrow diskcache alabaster codecov mysql-connector-python pymysql mysqlclient rdflib psycopg2 reportlab libnetcdf netcdf4 h5netcdf mmtf-python gsd griddataformats absl-py grpcio werkzeug munch cudatoolkit cudnn nccl nccl2 -c intel -c conda-forge -c pytorch -c menpo -c lukepfister
+    conda install -y intelpython numpy scipy matplotlib sympy scikit-learn pyyaml typing six pandas networkx requests jpeg zlib tornado cython daal h5py hdf5 pillow pycparser isort ply jinja2 arrow singledispatch mypy mypy_extensions dask mkl-devel mkl-dnn mkl-include mkl mkl_fft mkl_random icc_rt tbb greenlet protobuf libprotobuf psutil intervals nose numba cryptography glib gmp icu idna flask libffi libgcc libgcc-ng libgfortran-ng libstdcxx-ng asn1crypto openssl pyopenssl openmp theano seaborn cffi future affine zeromq setuptools pip pydaal yaml pydot backports statsmodels llvmlite graphviz openpyxl certifi click cloudpickle execnet more-itertools mpmath numexpr rope simplegeneric sqlite tcl tk pcre pexpect ptyprocess py pytables python-dateutil fastrlock filelock theano==1.1 pyzmq tqdm autograd scikit-image scikit-optimize jupyter jupyter_client jupyter_console jupyter_core jupyterlab jupyterlab_launcher notebook ipykernel ipyparallel ipython ipython_genutils ipywidgets ninja widgetsnbextension pytest pytest-runner websocket-client nbconvert nbformat nbsphinx nbstripout nbval sphinx sphinxcontrib sphinxcontrib-websupport sphinx_rtd_theme imageio imagehash ipdb numpydoc pytest-cov flake8 pytest-xdist pybind11 yapf pypandoc pep8-naming wheel virtualenv mock pytest-mock tox spacy tabulate attrs jedi typing-extensions pytest-runner recommonmark sphinx-autobuild sortedcontainers sortedcollections pycodestyle progressbar2 coveralls bumpversion scrapy coverage xarray docker-pycreds appdirs packaging pyparsing urllib3 pytest-timeout quantities ordered-set pyflakes libunwind autopep8 spyder-kernels cartopy astropy termcolor terminado pydotplus opencv markdown markupsafe livereload pyopengl httplib2 pathtools pylint pyqt jsonschema parso path.py patsy pickleshare qt terminado python-dateutil wrapt cytoolz dill eigen sparsehash jupyter_contrib_nbextensions bcolz feather-format plotnine msgpack-python ansiwrap boto3 vcrpy requests metakernel cached-property apscheduler sqlalchemy alembic gevent peewee testfixtures pbr traitlets pytz django django-extensions faker pyscaffold dask-ml scikit-mdr skrebate ncurses chardet cuda92 magma-cuda92 glfw3 docopt botocore pep8 jsonpickle pymc3 pycuda pytools nose2 mako pluggy atomicwrites pdbpp wmctrl luigi metis parmetis gperftools joblib gast astor emcee paramz plotly pymongo pyspark parquet-cpp fastparquet pyarrow diskcache alabaster codecov mysql-connector-python pymysql mysqlclient rdflib psycopg2 reportlab libnetcdf netcdf4 h5netcdf mmtf-python gsd griddataformats absl-py grpcio werkzeug munch cudatoolkit cudnn nccl nccl2 paramiko -c intel -c conda-forge -c pytorch -c menpo -c lukepfister
     #conda remove -y cmake cudatoolkit curl --force
     conda remove -y cmake curl --force
     source deactivate
@@ -286,7 +289,8 @@ export WITH_GLOO_IBVERBS=0
 export WITH_ROCM=0
 
 # Configuration flags
-export DEBUG=0
+#export DEBUG=0
+export USE_OPENCV=1
 export USE_SYSTEM_EIGEN_INSTALL=0
 
 # Prepare temporary directory for compilation
@@ -955,6 +959,12 @@ pip install --upgrade --no-deps pmda
 
 ## ADDITIONAL EXTRAS ##
 
+# FastProgress
+pip install --upgrade --no-deps fastprogress
+
+# DataClasses backport
+pip install --upgrade --no-deps dataclasses
+
 # Cadene's pretrained-models for pytorch & additions
 git clone --recursive https://github.com/Cadene/pretrained-models.pytorch.git
 cd pretrained-models.pytorch
@@ -978,6 +988,27 @@ cd imgaug
 pip install --upgrade --no-deps .
 cd ../
 pip install --upgrade --no-deps git+https://github.com/albu/albumentations
+
+# Facebook's FAIRseq
+git clone --recursive https://github.com/pytorch/fairseq.git
+cd fairseq
+pip install --upgrade --no-deps .
+cd ..
+
+# Facebook's translate
+git clone --recursive https://github.com/pytorch/translate.git
+cd translate
+pip install --upgrade --no-deps .
+cd ..
+
+# FAST.AI
+pip install --upgrade --no-deps fastai=="$SELF_FASTAI_V"
+
+# NVIDIA's APEX
+git clone --recursive https://github.com/NVIDIA/apex.git
+cd apex
+pip install --upgrade --no-deps .
+cd ..
 
 
 # Fix the nasty cmake/ccmake bug
