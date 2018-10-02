@@ -56,9 +56,6 @@
 # PyTorch version:
 export SELF_PTBRANCH_V="master"                                         # The version of PyTorch you want to install ("master" for the latest unstable)
 
-# FAST.AI version
-export SELF_FASTAI_V="1.0.0b7"                                          # The version of the FAST.AI library that you want to install
-
 # Anaconda
 export SELF_CEACT_COMMAND="intelactivate"                               # Command used to activate conda environments (usually "activate" as in "source activate ...")
 export SELF_CONDA_ENV_NAME="aistack"                                    # Name of Conda environment to contain the environment setup (must be new)
@@ -302,6 +299,10 @@ cd ./pthbuild
 # Clone repository
 git clone --recursive -b $SELF_PTBRANCH_V https://github.com/pytorch/pytorch
 cd ./pytorch
+
+# Patch repository with custom patch for very recent Linux/Unix systems (fails if already patched upstream!)
+wget --tries=0 --retry-connrefused --continue --progress=bar --show-progress --timeout=30 --dns-timeout=30 --random-wait https://ballarin.cc/mirrorsrv/aistack/2f7a0c9b68509e4de0770791240516baa648244a.patch
+git apply 2f7a0c9b68509e4de0770791240516baa648244a.patch
 
 # Uninstall previous version(s)
 pip uninstall -y torch
@@ -1002,7 +1003,7 @@ pip install --upgrade --no-deps .
 cd ..
 
 # FAST.AI
-pip install --upgrade --no-deps fastai=="$SELF_FASTAI_V"
+pip install --upgrade --no-deps fastai
 
 # NVIDIA's APEX
 git clone --recursive https://github.com/NVIDIA/apex.git
