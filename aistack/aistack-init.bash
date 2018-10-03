@@ -1,6 +1,6 @@
 #!/bin/bash
 #######################################
-##   AIStack, v. 0.12 (01/10/2018)   ##
+##   AIStack, v. 0.13 (04/10/2018)   ##
 #######################################
 #
 # A deterministic and reliable bootstrapper for an AI/ML research environment
@@ -1016,6 +1016,28 @@ pip install --upgrade --no-deps datacleaner
 
 # Dora
 pip install --upgrade --no-deps Dora
+
+# Montefiore AI - Clustertools
+git clone --recursive https://github.com/montefiore-ai/clustertools.git
+cd clustertools
+pip install --upgrade --no-deps .
+cd ..
+
+# FUZZY INFERENCE, SUGENO INFERENCE, PSO #
+git clone --recursive https://github.com/aresio/miniful.git
+cd miniful
+pip install --upgrade --no-deps .
+cd ..
+
+git clone --recursive https://github.com/aresio/fst-pso.git
+cd fst-pso
+pip install --upgrade --no-deps .
+cd ..
+
+git clone --recusrive https://github.com/aresio/simpful.git
+cd simpful
+pip install --upgrade --no-deps .
+cd ..
 
 
 # Fix the nasty cmake/ccmake bug
