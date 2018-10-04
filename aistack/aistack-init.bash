@@ -1034,7 +1034,7 @@ cd fst-pso
 pip install --upgrade --no-deps .
 cd ..
 
-git clone --recusrive https://github.com/aresio/simpful.git
+git clone --recursive https://github.com/aresio/simpful.git
 cd simpful
 pip install --upgrade --no-deps .
 cd ..
