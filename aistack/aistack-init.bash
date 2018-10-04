@@ -1039,6 +1039,11 @@ cd simpful
 pip install --upgrade --no-deps .
 cd ..
 
+git clone --recursive https://github.com/scikit-fuzzy/scikit-fuzzy.git
+cd scikit-fuzzy
+pip install --upgrade --no-deps .
+cd ..
+
 
 # Fix the nasty cmake/ccmake bug
 source deactivate
