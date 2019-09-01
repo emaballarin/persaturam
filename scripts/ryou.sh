@@ -1,6 +1,7 @@
 #######################################################
 ##            RYOU - Roll Your Own Unison            ##
 ## (C) 2019 Emanuele Ballarin <emanuele@ballarin.cc> ##
+##             Distribution: MIT License             ##
 #######################################################
 
 ################
