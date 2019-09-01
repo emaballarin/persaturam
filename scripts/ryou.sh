@@ -7,9 +7,9 @@
 ################
 ### SETTINGS ###
 ################
-SSH_USERNAME="eballarin"
-SSH_REMOTE="172.30.121.156"
-SSH_DESTINATION="/home/eballarin/bin/"
+SSH_USERNAME="..."
+SSH_REMOTE="..."
+SSH_DESTINATION="..."
 
 ################################################################################
 
